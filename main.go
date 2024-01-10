@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	wordnet "github.com/bosari-a/go-wordnet"
 )
@@ -22,8 +23,9 @@ func main() {
 		panic(err)
 	}
 	output := fmt.Sprintf("%v%v%v:\n", GREEN, word.Word, RESET)
-	for k, v := range word.Definitions {
-		output += fmt.Sprintf("%v%v%v: %v\n", BLUE, k, RESET, v)
+	for _, v := range word.Definitions {
+		substr := strings.Split(v, " - ")
+		output += fmt.Sprintf("%v%v%v: %v\n\n", BLUE, substr[0], RESET, substr[1])
 	}
 	fmt.Print(output)
 }
